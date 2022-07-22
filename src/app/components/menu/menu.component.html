@@ -1,0 +1,196 @@
+<div class="grid">
+    <div class="col-12">
+        <div class="card" style="height: calc(100vh - 150px)">
+            <h5>Sites</h5>
+            <p-dataView
+                #dv
+                [value]="products"
+                [paginator]="false"
+                layout="grid"
+            >
+                <ng-template pTemplate="header">
+                    <button
+                        pButton
+                        pRipple
+                        type="button"
+                        label="Add Site"
+                        class="p-button-outlined mr-2 mb-2"
+                        style="margin-left: 89%"
+                        (click)="toggleAddSiteDialog()"
+                    ></button>
+                </ng-template>
+
+                <ng-template let-product pTemplate="gridItem">
+                    <div class="col-12 md:col-4">
+                        <div class="card m-3 border-1 border-primary">
+                            <div
+                                class="flex align-items-center justify-content-between"
+                            >
+                                <div class="flex align-items-center"></div>
+                                <span [class]="'sm:ml-2 product-badge mb-3'">
+                                    <p-confirmDialog
+                                        header="Confirmation"
+                                        key="confirm1"
+                                        icon="pi pi-exclamation-triangle text-orange-700"
+                                        message="Are you sure you want to proceed?"
+                                        [style]="{ width: '550px' }"
+                                        acceptButtonStyleClass="p-button-danger"
+                                        rejectButtonStyleClass="p-button-text"
+                                    ></p-confirmDialog>
+
+                                    <i
+                                        class="pi pi-pencil mr-3 text-yellow-600 cursor-pointer"
+                                    ></i
+                                    ><i
+                                        class="pi pi-trash text-orange-700 cursor-pointer"
+                                        (click)="confirm1()"
+                                    ></i
+                                ></span>
+                            </div>
+                            <div class="text-center">
+                                <i class="pi pi-file text-8xl mb-4"></i>
+                                <div class="text-xl font-bold">
+                                    {{ product.name }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+            </p-dataView>
+        </div>
+    </div>
+
+    <p-dialog
+        [(visible)]="addSiteDialog"
+        [style]="{ width: '550px' }"
+        header="Product Details"
+        [modal]="true"
+        class="p-fluid"
+    >
+        <ng-template pTemplate="content">
+            <div class="field">
+                <label for="name">Name</label>
+                <input
+                    type="text"
+                    pInputText
+                    id="name"
+                    [(ngModel)]="product.name"
+                    required
+                    autofocus
+                    [ngClass]="{
+                        'ng-invalid ng-dirty': submitted && !product.name
+                    }"
+                />
+                <small
+                    class="ng-dirty ng-invalid"
+                    *ngIf="submitted && !product.name"
+                    >Name is required.</small
+                >
+            </div>
+            <div class="field">
+                <label for="description">Description</label>
+                <textarea
+                    id="description"
+                    pInputTextarea
+                    [(ngModel)]="product.description"
+                    required
+                    rows="3"
+                    cols="20"
+                ></textarea>
+            </div>
+
+            <div class="field">
+                <label for="status">Inventory Status</label>
+                <p-dropdown
+                    id="status"
+                    [options]="siteTypeOptions"
+                    optionLabel="label"
+                    [(ngModel)]="siteTypeSelected"
+                    placeholder="Select a Status"
+                >
+                </p-dropdown>
+            </div>
+
+            <div class="field">
+                <label class="mb-3">Category</label>
+                <div class="formgrid grid">
+                    <div class="field-radiobutton col-6">
+                        <p-radioButton
+                            id="category1"
+                            name="category"
+                            value="Accessories"
+                            [(ngModel)]="product.category"
+                        ></p-radioButton>
+                        <label for="category1">Accessories</label>
+                    </div>
+                    <div class="field-radiobutton col-6">
+                        <p-radioButton
+                            id="category2"
+                            name="category"
+                            value="Clothing"
+                            [(ngModel)]="product.category"
+                        ></p-radioButton>
+                        <label for="category2">Clothing</label>
+                    </div>
+                    <div class="field-radiobutton col-6">
+                        <p-radioButton
+                            id="category3"
+                            name="category"
+                            value="Electronics"
+                            [(ngModel)]="product.category"
+                        ></p-radioButton>
+                        <label for="category3">Electronics</label>
+                    </div>
+                    <div class="field-radiobutton col-6">
+                        <p-radioButton
+                            id="category4"
+                            name="category"
+                            value="Fitness"
+                            [(ngModel)]="product.category"
+                        ></p-radioButton>
+                        <label for="category4">Fitness</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="formgrid grid">
+                <div class="field col">
+                    <label for="price">Price</label>
+                    <p-inputNumber
+                        id="price"
+                        [(ngModel)]="product.price"
+                        mode="currency"
+                        currency="USD"
+                        locale="en-US"
+                    ></p-inputNumber>
+                </div>
+                <div class="field col">
+                    <label for="quantity">Quantity</label>
+                    <p-inputNumber
+                        id="quantity"
+                        [(ngModel)]="product.quantity"
+                    ></p-inputNumber>
+                </div>
+            </div>
+        </ng-template>
+
+        <ng-template pTemplate="footer">
+            <button
+                pButton
+                pRipple
+                label="Cancel"
+                icon="pi pi-times"
+                class="p-button-text"
+                (click)="hideDialog()"
+            ></button>
+            <button
+                pButton
+                pRipple
+                label="Save"
+                icon="pi pi-check"
+                class="p-button-text"
+                (click)="saveProduct()"
+            ></button>
+        </ng-template>
+    </p-dialog>
+</div>

@@ -1,0 +1,40 @@
+{
+    "data": [
+        {
+            "id": "1027",
+            "code": "acvx872gc",
+            "name": "Cafe 70",
+            "description": "Product Description",
+            "image": "qr1.webp",
+            "price": 89,
+            "category": "Electronics",
+            "quantity": 35,
+            "inventoryStatus": "Active",
+            "rating": 3
+        },
+        {
+            "id": "1028",
+            "code": "tx125ck42",
+            "name": "Star Hotel",
+            "description": "Product Description",
+            "image": "qr2.jpeg",
+            "price": 20,
+            "category": "Fitness",
+            "quantity": 15,
+            "inventoryStatus": "Inactive",
+            "rating": 5
+        },
+        {
+            "id": "1029",
+            "code": "gwuby345v",
+            "name": "Gyani ice cream",
+            "description": "Product Description",
+            "image": "qr3.png",
+            "price": 20,
+            "category": "Fitness",
+            "quantity": 25,
+            "inventoryStatus": "Inactive",
+            "rating": 8
+        }
+    ]
+}
